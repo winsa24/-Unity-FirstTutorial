@@ -33,22 +33,22 @@ public class Player : MonoBehaviour
 
         GetComponent<Rigidbody>().velocity = new Vector3(horizontalInput * 2, GetComponent<Rigidbody>().velocity.y, 0);
 
-        if (Physics.OverlapSphere(checkGroundTransform.position, 0.1f, playerMask).Length == 0)
-        {
+        //if (Physics.OverlapSphere(checkGroundTransform.position, 0.1f, playerMask).Length == 0)
+        //{
 
-            return;
-        }
+        //    return;
+        //}
 
-        if (jumpKeyPressDown)
+        if (jumpKeyPressDown && (countJump < 1))
         {
             if (superJump > 0)
             {
-                GetComponent<Rigidbody>().AddForce(Vector3.up * 10, ForceMode.VelocityChange);
+                GetComponent<Rigidbody>().AddForce(Vector3.up * 7, ForceMode.VelocityChange);
                 superJump--;
             }
             else
             {
-                GetComponent<Rigidbody>().AddForce(Vector3.up * 7, ForceMode.VelocityChange);
+                GetComponent<Rigidbody>().AddForce(Vector3.up * 5, ForceMode.VelocityChange);
             }
 
 
@@ -57,16 +57,10 @@ public class Player : MonoBehaviour
             Debug.Log(countJump);
         }
 
-
-        //if (countJump < 2)
-        //{
-            
-            
-        //}
-        //else
-        //{
-        //    countJump = 0;
-        //}
+        if (Physics.OverlapSphere(checkGroundTransform.position, 0.1f, playerMask).Length != 0)
+        {
+            countJump = 0;
+        }
 
     }
 
